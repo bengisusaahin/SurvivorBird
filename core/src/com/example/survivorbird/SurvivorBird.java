@@ -11,24 +11,43 @@ public class SurvivorBird extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background;
 	Texture bird;
+	Texture bee1;
+	Texture bee2;
+	Texture bee3;
 	float birdX = 0;
 	float birdY = 0;
 	int gameState = 0;
 	float velocity = 0;
 	float gravity = 0.1f;
+	float enemyX = 0;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("background.png");
 		bird = new Texture("bird.png");
+		bee1 = new Texture("bee.png");
+		bee2 = new Texture("bee.png");
+		bee3 = new Texture("bee.png");
+
+		enemyX = 900;
+
 		birdX = Gdx.graphics.getWidth()/2 - bird.getHeight() /2;
 		birdY = Gdx.graphics.getHeight()/3;
 	}
 
 	@Override
 	public void render () {
+		batch.begin();
+		batch.draw(background, 0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
 		if (gameState == 1){
+			batch.draw(bee1,enemyX,50, Gdx.graphics.getWidth() / 15, Gdx.graphics.getHeight() / 10);
+			batch.draw(bee2,enemyX,150, Gdx.graphics.getWidth() / 15, Gdx.graphics.getHeight() / 10);
+			batch.draw(bee3,enemyX,350, Gdx.graphics.getWidth() / 15, Gdx.graphics.getHeight() / 10);
+
+			enemyX -= 2;
+
 			if (Gdx.input.justTouched()){
 				velocity = -7;
 			}
@@ -41,11 +60,9 @@ public class SurvivorBird extends ApplicationAdapter {
 				gameState = 1;
 			}
 		}
-		batch.begin();
-		batch.draw(background, 0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
 		batch.draw(bird, birdX,birdY, Gdx.graphics.getWidth() / 15,
 				Gdx.graphics.getHeight() / 10 );
-
 		batch.end();
 	}
 	
