@@ -28,11 +28,11 @@ public class SurvivorBird extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		if (Gdx.input.justTouched()){
-			gameState = 1;
-		}
 		if (gameState == 1){
-			if (birdY > 0 || velocity < 0){
+			if (Gdx.input.justTouched()){
+				velocity = -7;
+			}
+			if (birdY > 0 || velocity < 0){ //velocity nasıl 0dan kucuk olabilr ki >0 yapinca patladi
 				velocity = velocity + gravity;
 				birdY = birdY - velocity;
 			}
